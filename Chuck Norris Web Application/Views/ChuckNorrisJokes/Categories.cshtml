@@ -1,0 +1,32 @@
+﻿@model Chuck_Norris_Web_Application.Models.CategoriesViewModel
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content container-fluid my-n9">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="row mb-5">
+            <div class="card">
+                <div class="card-body" style="background-color:palegreen">
+                        @foreach (var item in Model.Categories.CategoriesList)
+                        {
+                            <a href="@Url.Action("Jokes","ChuckNorrisJokes", new { category = item})" class="btn btn-white anchorTag">@item</a>
+                        }
+                </div>
+            </div>
+        </div>
+        @{await Html.RenderPartialAsync("Jokes", Model);}
+    </div>
+</div>
+
+
+@section Scripts{ 
+    <script type="text/javascript">
+        $(".anchorTag").click(function (e) {
+            $('#dvJokes').load('/ChuckNorrisJokes/Jokes');
+        });
+    </script>
+}
